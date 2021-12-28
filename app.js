@@ -9,6 +9,7 @@ const inputNom = document.querySelector("input#nom")
 const inputPrenom = document.querySelector("input#prenom")
 const appNiveau = document.querySelector("select#selection")
 const inputBiographie = document.querySelector("textarea#biographie")
+const sauvegarder = document.getElementById("sauvegarder")
 const tab= []
 
 
@@ -85,6 +86,7 @@ const creerUneCarte = (app) => {
       biographie: biographieSaisi,
     } 
     creerUneCarte(nouvelleApp)
+    tab.push(nouvelleApp)
     // on vide les champs
     inputNom.value = ""
     inputPrenom.value = ""
@@ -92,48 +94,33 @@ const creerUneCarte = (app) => {
     inputBiographie.value = ""
   });
 
-  document.querySelector('.btn').addEventListener('click', ()=>{
+  sauvegarder.addEventListener('click', ()=>{
 
-    // Récupération des informations saisies
- const nomSauvegarde = inputNom.value
- const prenomSauvegarde = inputPrenom.value
- const niveauSauvegarde = appNiveau.value
- const biographieSauvegarde = inputBiographie.value
-
-
-  // mettre les informations sous forme
-  const nouvelApp = {
-     nom: nomSauvegarde,
-     prenom: prenomSauvegarde,
-     niveau: niveauSauvegarde,
-     biographie: biographieSauvegarde,
-   } 
-   
- //ENVOYER LES DONNEES VERS SUPABASE
+   tab.forEach((element) => {
+       //ENVOYER LES DONNEES VERS SUPABASE
  fetch(API_URL, {
-   method: "POST",
-   headers: {
-     apikey: API_KEY,
-     "Content-Type": "application/json",
-     Prefer: "return=representation",
-   },
-   body: JSON.stringify(nouvelApp),
- })
-   .then((response) => response.json())
-   .then((data) => {
-     appCreeAuNiveauAPI = data[0]
-     creerUneCarte(appCreeAuNiveauAPI)
-     tab.push(nouvelApp)
+    method: "POST",
+    headers: {
+      apikey: API_KEY,
+      "Content-Type": "application/json",
+      Prefer: "return=representation",
+    },
+    body: JSON.stringify(element),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      appCreeAuNiveauAPI = data[0]
+      window.location.href="liste .html"
+    })
+
    })
+    // on vide les champs
+    inputNom.value = ""
+    inputPrenom.value = ""
+    appNiveau.value = ""
+    inputBiographie.value = ""
    
-// on vide les champs
- inputNom.value = ""
- inputPrenom.value = ""
- appNiveau.value = ""
- inputBiographie.value = ""
-
- location.href = "liste .html"
-
- })
+   })
+ 
 
 

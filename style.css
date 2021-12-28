@@ -4,10 +4,10 @@
 }
 .app{
 box-sizing: content-box;
-background-color: beige;
+background-color: rgb(247, 247, 252);
 width: 1300px;
 height: 700px;
-border: solid beige 1px;
+border: solid  rgb(247, 247, 252) 1px;
 padding: 5px;
 margin-right: 15px;
 }
@@ -19,4 +19,7 @@ margin-right: 15px;
 .card-niveau{
     position: relative;
     left: 120px;
+}
+.scool{
+    color: white;
 }
