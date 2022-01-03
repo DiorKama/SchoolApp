@@ -13,7 +13,7 @@ const sauvegarder = document.getElementById("sauvegarder")
 
 const creerUneCarte = (app) => {
     //création de nos ids
-   
+   const idbtndetail ="btn-datail" + app.id
     //Insertion de la carte au niveau du DOM
     apprenantElement.insertAdjacentHTML(
       "beforeend",
@@ -28,12 +28,21 @@ const creerUneCarte = (app) => {
             <h5 class="card-title fw-bold">${app.prenom} ${app.nom}</h5>
             <p class="card-text text-gris">${app.biographie}</p>
             <p class="card-text card-niveau">${app.niveau}</p>
+            <button id="${idbtndetail}" class="btn-success btndetail">Details</button>
           </div>
         </div>
       </div>
     </div>
     `
     )
+
+    const btnDetail = document.getElementById(idbtndetail)
+    btnDetail.addEventListener('click', (event)=>{
+      event.preventDefault();
+      //alert(app.nom);
+      sessionStorage.setItem("idApp",app.id)
+      window.location.href="details.html"
+    })
 }
 
 window.addEventListener("DOMContentLoaded", (event) => {

@@ -15,7 +15,8 @@ const tab= []
 
 //Les fonctions
 const creerUneCarte = (app) => {
-    //création de nos ids
+  const idButtonModifier ="btn_modifier" +app.id
+  const idButtonSupprimer ="btn_supprimer" +app.id
    
     //Insertion de la carte au niveau du DOM
     apprenantElement.insertAdjacentHTML(
@@ -23,10 +24,21 @@ const creerUneCarte = (app) => {
       `
       <div class="card card-app mb-2 ms-3 shadow" style="max-width: 350px;">
       <div class="row g-0">
-        <div class="col-md-4">
-          <img src="./image/homme.png" class="img-fluid rounded-start" alt="...">
+        <div class="col-md-3">
+            <img src="./image/homme.png" class="img-fluid rounded-start" alt="...">
         </div>
-        <div class="col-md-8">
+        <div class="col-md-3">
+        <i class="bi bi-pencil text-primary card-link btn"
+        id="${idButtonModifier}"
+        style="font-size:2rem;">
+        </i>
+
+        <i class="bi bi-trash card-link btn"
+        id="${idButtonSupprimer}"  
+        style="font-size:2rem; color:#ce0033;">
+        </i>
+        </div>
+        <div class="col-md-6">
           <div class="card-body">
             <h5 class="card-title fw-bold">${app.prenom} ${app.nom}</h5>
             <p class="card-text text-gris">${app.biographie}</p>
@@ -35,9 +47,13 @@ const creerUneCarte = (app) => {
         </div>
       </div>
     </div>
-    `
-    )
+    `)
 }
+
+//--------Ajout des evenements sur les button----------------------------------
+const btnModifier= document.getElementById('idButtonModifier')
+const btnSupprimer = document.getElementById('idButtonSupprimer')
+
 
 // VERIFICATION DES MOTS SAISIS
   inputBiographie.addEventListener("input", (event) => {
@@ -112,14 +128,12 @@ const creerUneCarte = (app) => {
       appCreeAuNiveauAPI = data[0]
       window.location.href="liste .html"
     })
-
    })
     // on vide les champs
     inputNom.value = ""
     inputPrenom.value = ""
     appNiveau.value = ""
     inputBiographie.value = ""
-   
    })
  
 
